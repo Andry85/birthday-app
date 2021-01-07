@@ -5,7 +5,8 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
-  
+
+
   button {
       margin-left: 10px;
   }
@@ -15,11 +16,33 @@
      font-size: 1rem;
      margin: 0;
      line-height: 1.5;
+     width: 100px;
   }
   &__data {
-     padding-left: 45px;
      margin-right: auto;
   }
 
 }
 
+
+@media (max-width: 767.98px) {
+   .row {
+     flex-direction: column;
+
+     button {
+        margin: 0 0 15px 0;
+   }
+
+     &__name {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+     }
+
+     &__data {
+         margin-right: auto;
+         margin-left: auto;
+         padding: 10px 0;
+      }
+   }
+ }
