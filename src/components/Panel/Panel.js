@@ -46,57 +46,57 @@ function Panel() {
   const [userName, setUserName] = useState('');
   const [userId, setUserId] = useState(null);
   const [actionName, setActionName] = useState('+ Add a person');
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const setInfo = (name, startDate) => {
     console.log(name);
-    console.log(startDate);
 
-    let day = startDate.getDate();
-    let month = startDate.getMonth() + 1;
-    let year = startDate.getFullYear();
-
-    if (day < 10) {
-      day = `0${day}`;
-    }
-
-    if (month < 10) {
-      month = `0${month}`;
-    }
-
-
-    setHumans(prevVal => {
-
-      if (actionName === 'Edit the person') {
-
-        return [
-          ...prevVal.slice(0, userId),
-          {
-            id: userId,
-            name: name,
-            data: `${day}.${month}.${year}`
-          },
-          ...prevVal.slice(userId + 1)
-        ];
-
-      } else {
-        return [
-          ...prevVal,
-          {
-            id: prevVal.length,
-            name: name,
-            data: `${day}.${month}.${year}`
-          }
-        ];
+    if (name !== '') {
+      let day = startDate.getDate();
+      let month = startDate.getMonth() + 1;
+      let year = startDate.getFullYear();
+  
+      if (day < 10) {
+        day = `0${day}`;
       }
-
-     
-
-    });
-
-    setActionName('+ Add a person');
-
-    console.log(userId);
-
+  
+      if (month < 10) {
+        month = `0${month}`;
+      }
+  
+  
+      setHumans(prevVal => {
+  
+        if (actionName === 'Edit the person') {
+  
+          return [
+            ...prevVal.slice(0, userId),
+            {
+              id: userId,
+              name: name,
+              data: `${day}.${month}.${year}`
+            },
+            ...prevVal.slice(userId + 1)
+          ];
+  
+        } else {
+          return [
+            ...prevVal,
+            {
+              id: prevVal.length,
+              name: name,
+              data: `${day}.${month}.${year}`
+            }
+          ];
+        }
+  
+      });
+  
+      setActionName('+ Add a person');
+      setErrorMsg(null);
+    } else {
+      setErrorMsg('Enter the name');
+    }
 
   }
 
@@ -124,10 +124,6 @@ function Panel() {
     setStartDate(d);
 
     setActionName('Edit the person');
-
-    console.log(userId);
-
-  
 
   }
 
@@ -163,6 +159,7 @@ function Panel() {
         startDate = {startDate}
         userName = {userName}
         actionName = {actionName}
+        errorMsg = {errorMsg}
       />
       
       
